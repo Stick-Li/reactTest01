@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类基本知识03</title>
+</head>
+<body>
+    <script type="text/javascript">
+        class Car{
+            constructor(name,price){
+                this.name = name
+                this.price = price
+            }
+            // 类中可以直接写赋值语句
+            // 下面代码的含义是：给Car的实例对象添加一个属性，名为a，值为1
+            a = 1
+            wheel = 4
+
+            // 给类自身加一个属性，加给Car这个类本身，不是加给实例
+            // 静态属性(只能通过类名来访问) 给Car类自身加一个demo属性为1000
+            static demo = 1000
+        }
+
+        const c1 = new Car('奔驰',123)
+        console.log(c1)
+        console.log(Car.demo)
+    </script>
+</body>
+</html>

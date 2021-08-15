@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建一个Person类
+        class Person{
+            // 构造器方法
+            constructor(name,age){
+                // 构造器中的this是谁————类的实例对象
+                this.name = name
+                this.age = age
+            }
+            // 一般方法
+            speak(){
+                // speak方法放在了哪里————类的原型对象上，供实例使用
+                // 通过Person实例对象调用Person时，speak中的this就是Person实例
+                console.log(`我是${this.name}，我今年${this.age}`)
+            }
+        }
+
+        // 创建一个Student类，继承于Person类
+        class Student extends Person{
+            constructor(name,age,grade){
+                super(name,age)
+                this.grade = grade
+            }
+            // 重写从父类继承过来的方法
+            speak(){
+                console.log(`我是${this.name}，我今年${this.age},我读${this.grade}年级`)
+            }
+            study(){
+                // study方法放在了哪里————类的原型对象上，供实例使用
+                // 通过Student实例调用study时，study中的this就是Student实例
+                console.log("我会很努力的学习")
+            }
+        }
+
+        // 创建一个Person的实例对象
+        const p1 = new Person('tom',18)
+        const p2 = new Person('lee',20)
+
+        console.log(p1)
+        console.log(p2)
+
+        p1.speak()
+        p2.speak()
+
+        const s1 = new Student('小李',20,'大二')
+        console.log(s1)
+        s1.speak()
+        s1.study()
+
+
+    </script>
+</body>
+</html>
+
+<!-- 
+    https://www.bilibili.com/video/BV1wy4y1D7JT?p=10&spm_id_from=pageDriver
+ -->
+
+ <!-- 
+     总结：
+        1.类中的构造器不是必须写的，要对实例进行一些初始化的操作，如添加指定属性时才写。
+        2.如果B类继承了A类，且B类中写了构造器，那么B类构造器中的super是必须要调用的。
+        3.类中所定义的方法，都是放在了类的原型对象上，供实例去使用
+  -->

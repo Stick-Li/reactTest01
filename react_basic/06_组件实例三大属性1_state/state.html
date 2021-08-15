@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 准备好一个容器 -->
+    <div id="test"></div>
+
+    <!-- 引入react核心库 -->
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <!-- 引入react-dom，用于支持react操作DOM -->
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <!-- 引入bable，用于将jsx转为js -->
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel"> /*此处一定要写babel*/
+
+        let that
+        //1.创建组件
+        class Weather extends React.Component {
+
+            state = {
+                isHot: false,
+
+            }
+
+            componentDidMount(){
+                console.log('componentDidMount')
+            }
+
+            componentWillMount(){
+                console.log('componentWillMount')
+            }
+
+            changeWeather = () => {
+                console.log(this.state.isHot)
+                this.setState({
+                    isHot:true
+                })
+            }
+
+            shouldComponentUpate(){
+                console.log('shouldComponentUpate')
+            }
+
+            componentWillUpdate(){
+                console.log('componentWillUpdate')
+            }
+            componentDidUpdate(){
+                console.log('componentDidUpdate')
+            }
+
+
+            render() {
+                // 读取判断
+                const { isHot } = this.state
+                console.log(this.state)
+                const prop = this.props
+                console.log('render')
+                return (
+                    <h1 onClick={this.changeWeather}>天气很{isHot ? '炎热' : '凉爽'}</h1>
+
+                )
+            }
+        }
+        //2.渲染组件到页面
+        ReactDOM.render(<Weather />, document.getElementById('test'))
+
+
+        // function changeWeather(){
+        //     // console.log("标题被点击")
+        //     console.log(that.state.isHot)
+        // }
+    </script>
+</body>
+
+</html>

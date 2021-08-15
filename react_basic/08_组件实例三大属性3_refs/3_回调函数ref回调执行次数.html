@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回调函数ref回调执行次数</title>
+</head>
+<body>
+    <div id="text"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Demo extends React.Component{
+
+            state = {isHot:true}
+
+            changeWeather = () =>{
+                const {isHot} = this.state
+                this.setState({isHot:!isHot})
+            }
+
+            // 展示左侧输入框数据
+            showData=()=>{
+                const {input1} = this
+                alert(input1.value)
+            }
+
+            saveInput=(currentNode)=>{
+                this.input1 = currentNode
+                console.log('@',currentNode)
+            }
+
+            render(){
+                const {isHot} = this.state
+                return(
+                    <div>
+                        <h2>今天天气很{isHot?'炎热':'凉爽'}</h2>
+                        <button onClick={this.changeWeather} >点我切换天气</button>
+                        {/* <input ref={(currentNode)=>{this.input1 = currentNode;console.log('@',currentNode)}} type="text" placeholder="点击按钮提示数据"/> */}
+                        <input ref={this.saveInput} type="text"/>
+                        <button onClick={this.showData}>点我提示左侧数据</button>
+                    </div>
+                )
+                        //{(currentNode)=>{this.input1 = currentNode}}是回调函数的形式
+            }
+        }
+
+        ReactDOM.render(<Demo/>,document.getElementById('text'))
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回调函数形式的ref</title>
+</head>
+<body>
+    <div id="text"></div>
+
+    <script type="text/javascript" src="../js/react.development.js"></script>
+    <script type="text/javascript" src="../js/react-dom.development.js"></script>
+    <script type="text/javascript" src="../js/babel.min.js"></script>
+
+    <script type="text/babel">
+        class Demo extends React.Component{
+            // 展示左侧输入框数据
+            showData=()=>{
+                const {input1} = this
+                alert(input1.value)
+            }
+            // 展示右侧输入框数据
+            showData2=()=>{
+                const {input2} = this
+                alert(input2.value)
+            }
+
+            // 单独写一条测试点击的this是啥
+            test=()=>{
+                console.log(this)
+                console.log(this.testinput)
+            }
+
+            render(){
+                return(
+                    <div>
+
+                        <input ref={a=>{console.log(a),this.testinput = a}} 
+                                onBlur={this.test} type="text" placeholder="单独写一条来看看回调函数都调了什么" />
+
+                        <input ref={(currentNode)=>{this.input1 = currentNode}} type="text" placeholder="点击按钮提示数据"/>
+                        <button onClick={this.showData}>点我提示左侧数据</button>
+
+                        <input onBlur={this.showData2} ref={ c => this.input2 = c } type="text" placeholder="失去焦点提示数据"/>
+                    </div>
+                )
+                        //{(currentNode)=>{this.input1 = currentNode}}是回调函数的形式
+            }
+        }
+
+        ReactDOM.render(<Demo/>,document.getElementById('text'))
+    </script>
+
+</body>
+</html>
